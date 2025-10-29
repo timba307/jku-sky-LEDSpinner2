@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "jku-sky-LEDSPinner2"      # Project title
+  title:        "jku-sky-LEDSpinner2"      # Project title
   author:       "Tim Tremetsberger"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "LED Spinner on 7-Seg display with variable speeds"      # One line description of what your project does
