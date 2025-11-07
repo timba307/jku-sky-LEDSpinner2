@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Fri Nov  7 17:02:22 2025
+[*]
+[dumpfile] "/foss/designs/jku-sky-LEDSpinner2/test/rng_tb.vcd"
+[dumpfile_mtime] "Fri Nov  7 17:01:13 2025"
+[dumpfile_size] 107982
+[savefile] "/foss/designs/jku-sky-LEDSpinner2/test/rng_tb.gtkw"
+[timestart] 0
+[size] 1427 600
+[pos] -1 -1
+*-7.000000 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[treeopen] rng_tb.
+[sst_width] 297
+[signals_width] 118
+[sst_expanded] 1
+[sst_vpaned_height] 149
+@28
+rng_tb.dut.clk_i
+@24
+rng_tb.dut.lfsr_o[3:0]
+@29
+rng_tb.dut.rst_i
+[pattern_trace] 1
+[pattern_trace] 0

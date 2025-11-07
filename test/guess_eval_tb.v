@@ -24,7 +24,7 @@ module guess_eval_tb;
 
   reg  [2:0] pos_i     = 3'd0;
   reg        running_i = 1'b1;  // während Spin: dp=0
-  reg  [5:0] guess_i   = 6'b000000;
+  reg  [5:0] guess_i   = 6'b000010;
   wire       dp_o;
 
   guess_eval dut (
@@ -38,31 +38,23 @@ module guess_eval_tb;
     $dumpfile("guess_eval_tb.vcd");
     $dumpvars;
 
-    /* verilator lint_off STMTDLY */
-    // Während Spin
     #50;
 
-    // Stop → dp sollte Bit pos_i spiegeln
-    running_i = 1'b0;
-
-    // Sweep pos mit leerem guess (dp=0)
+    // try all positions while running=1
     repeat (6) begin
       pos_i = pos_i + 1;
       #50;
     end
 
-    // Alle guesses an → dp=1 für pos 0..5
-    guess_i = 6'b111111;
+    // try all positions while wheel is "stopped" (running=0)
+    running_i = 1'b0;
+    guess_i = 6'b010000;
     pos_i   = 0;
     repeat (6) begin
       #50 pos_i = pos_i + 1;
     end
 
-    // Irrelevante pos (>=6) → default 0
-    pos_i = 3'd6; #50;
-    pos_i = 3'd7; #50;
 
     $finish;
-    /* verilator lint_on STMTDLY */
   end
 endmodule

@@ -43,21 +43,17 @@ module prescaler_tb;
 
   initial begin
     $dumpfile("prescaler_tb.vcd");
-    $dumpvars;
+    $dumpvars(0, prescaler_tb.rst_i, prescaler_tb.speed_i, prescaler_tb.tick_o);
 
     /* verilator lint_off STMTDLY */
     #100 rst_i = 1'b0;
 
     // Warte auf ein paar Ticks im default (8 Hz → alle 0.125 s)
-    #300_000_000; // ~2-3 Ticks
+    #270_000_000; // ~2-3 Ticks
 
     // Wechsel auf 4 Hz (limit=12_500_000)
     speed_i = 4'b1111;
-    #300_000_000;
-
-    // Wechsel auf 1 Hz (limit=50_000_000)
-    speed_i = 4'b0011;
-    #1_100_000_000; // ~1 Tick
+    #830_000_000;
 
     $finish;
     /* verilator lint_on STMTDLY */

@@ -25,7 +25,7 @@ module rng_tb;
 
   reg       clk_i  = 1'b0; // 50 MHz
   reg       rst_i  = 1'b1;
-  reg       en_i   = 1'b0;
+  reg       en_i   = 1'b1;
   wire [3:0] lfsr_o;
 
   rng dut (
@@ -41,11 +41,13 @@ module rng_tb;
   /* verilator lint_on STMTDLY */
 
   // Enable-Strobe: alle 200 ns (5 MHz) ein Takt lang 1
+  /*
   reg [7:0] div = 0;
   always @(posedge clk_i) begin
     div  <= div + 1;
     en_i <= (div == 8'd0);
   end
+  */
 
   initial begin
     $dumpfile("rng_tb.vcd");

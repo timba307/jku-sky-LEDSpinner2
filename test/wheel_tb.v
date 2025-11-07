@@ -36,6 +36,7 @@ module wheel_tb;
   reg [15:0] tick_div = 0;
   reg        tick_i   = 0;
 
+
   always @(posedge clk_i) begin
     if (rst_i) begin
       tick_div <= 0;
@@ -50,14 +51,17 @@ module wheel_tb;
       end
     end
   end
+  
 
   // RNG für rand_i (steppt bei jedem Tick)
+  
   rng rng_i (
     .clk_i(clk_i),
     .rst_i(rst_i),
     .en_i(tick_i),
     .lfsr_o(rand_i)
   );
+  
 
   wheel dut (
     .clk_i(clk_i),
@@ -73,6 +77,8 @@ module wheel_tb;
   /* verilator lint_off STMTDLY */
   always #10 clk_i = ~clk_i;
   /* verilator lint_on STMTDLY */
+
+
 
   initial begin
     $dumpfile("wheel_tb.vcd");
@@ -95,8 +101,17 @@ module wheel_tb;
     // Noch mal stoppen
     stop_i = 1'b1;
     #3_000_000;
+    
+    stop_i = 1'b0;
+    #2_000_000;
+    
+    stop_i=1'b1;
+    #3_000_000;
+    
 
     $finish;
     /* verilator lint_on STMTDLY */
   end
 endmodule
+
+
