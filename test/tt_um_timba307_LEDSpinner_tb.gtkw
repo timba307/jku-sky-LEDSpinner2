@@ -1,0 +1,56 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Sat Nov  8 13:33:56 2025
+[*]
+[dumpfile] "/foss/designs/jku-sky-LEDSpinner2/test/tt_um_timba307_LEDSpinner_tb.vcd"
+[dumpfile_mtime] "Sat Nov  8 13:32:06 2025"
+[dumpfile_size] 83392933
+[savefile] "/foss/designs/jku-sky-LEDSpinner2/test/tt_um_timba307_LEDSpinner_tb.gtkw"
+[timestart] 490000
+[size] 2390 988
+[pos] -1 -1
+*-21.000000 5820000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[markername] AA
+[markername] BB
+[markername] CC
+[markername] DD
+[markername] EE
+[markername] FF
+[markername] GG
+[markername] HH
+[markername] II
+[markername] JJ
+[markername] KK
+[markername] LL
+[markername] MM
+[markername] NN
+[markername] OO
+[markername] PP
+[markername] QQ
+[markername] RR
+[markername] SS
+[markername] TT
+[markername] UU
+[markername] VV
+[markername] WW
+[markername] XX
+[markername] YY
+[markername] ZZ
+[treeopen] tt_um_timba307_LEDSpinner_tb.
+[sst_width] 297
+[signals_width] 243
+[sst_expanded] 1
+[sst_vpaned_height] 281
+@28
+tt_um_timba307_LEDSpinner_tb.ui_in[7:0]
+tt_um_timba307_LEDSpinner_tb.uio_in[7:0]
+tt_um_timba307_LEDSpinner_tb.uo_out[7:0]
+@24
+tt_um_timba307_LEDSpinner_tb.dut.wheel_pos[2:0]
+@28
+tt_um_timba307_LEDSpinner_tb.dut.wheel_tick
+tt_um_timba307_LEDSpinner_tb.dut.wheel_running
+tt_um_timba307_LEDSpinner_tb.dut.stop_wheel
+tt_um_timba307_LEDSpinner_tb.dut.dp_on
+[pattern_trace] 1
+[pattern_trace] 0

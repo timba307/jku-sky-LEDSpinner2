@@ -29,12 +29,12 @@ module prescaler (
 
     always @(*) begin
         case (speed_i)
-            4'b0000: limit = 32'd100000000;  // 0.5 Hz
-            4'b0001: limit = 32'd75000000;   // 0.67 Hz
-            4'b0011: limit = 32'd50000000;   // 1 Hz
-            4'b0111: limit = 32'd25000000;   // 2 Hz
-            4'b1111: limit = 32'd12500000;   // 4 Hz
-            default: limit = 32'd6250000;    // 8 Hz
+            4'b0000: limit = 32'd50000000; // 1 Hz
+            4'b0001: limit = 32'd25000000; // 2 Hz
+            4'b0011: limit = 32'd12500000; // 4 Hz
+            4'b0111: limit = 32'd6250000; // 8 Hz
+            4'b1111: limit = 32'd3125000; //16 Hz
+            default: limit = 32'd50000; // 1kHz for testing
         endcase
     end
 

@@ -12,32 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-  Testbench für tt_um_timba307_LEDSpinner
-  - 50 MHz Systemtakt
-  - nutzt den internen Prescaler (Tick-Rate via ui_in[3:0])
-  - stop/guess Sequenzen zum Prüfen von dp/7-Segment
-*/
-
 `timescale 1ns/1ns
-
-// Alle Sourcefiles beim Kompilieren mitgeben (Top enthält bereits die `include`s)
 
 module tt_um_timba307_LEDSpinner_tb;
 
-  // Inputs des Tops
-  reg  [7:0] ui_in  = 8'h00; // [3:0]=speed, [7]=stop
-  reg  [7:0] uio_in = 8'h00; // [5:0]=guess
+  // inputs
+  reg  [7:0] ui_in  = 8'b00000000;
+  reg  [7:0] uio_in = 8'b00000000;
   reg        ena    = 1'b1;
   reg        clk    = 1'b0;
   reg        rst_n  = 1'b0;  // active-low
 
-  // Outputs
+  // outputs
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  // DUT
+  // dut
   tt_um_timba307_LEDSpinner dut (
     .ui_in(ui_in),
     .uo_out(uo_out),
@@ -56,40 +47,39 @@ module tt_um_timba307_LEDSpinner_tb;
 
   initial begin
     $dumpfile("tt_um_timba307_LEDSpinner_tb.vcd");
-    $dumpvars;
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.ui_in);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.uio_in);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.ena);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.rst_n);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.uo_out);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.uio_out);
+    $dumpvars(0, tt_um_timba307_LEDSpinner_tb.uio_oe);
+    $dumpvars(1, tt_um_timba307_LEDSpinner_tb.dut);
 
-    // Reset halten
-    /* verilator lint_off STMTDLY */
-    #200 rst_n = 1'b1; // deassert reset nach 200 ns
+    // reset deactivated
+    #200 rst_n = 1'b1;
 
-    // Schnellste Prescaler-Option im Design ist "default" → 8 Hz (limit=6_250_000)
-    // Setze speed_bits so, dass der default-Case greift (z.B. 4'b0101)
+    // set speed to invalid pattern to trigger default speed (1khz)
     ui_in[3:0] = 4'b0101;
 
-    // guesses: zunächst alle 0 → dp sollte AUS bleiben, wenn Wheel stoppt
+    // no guesses at first
     uio_in[5:0] = 6'b000000;
+    #4_000_000;
 
-    // Zuerst drehen lassen (stop=0)
-    ui_in[7] = 1'b0;
-
-    // Eine Weile laufen lassen
-    #300_000_000; // 0.3 s
-
-    // Stop anfordern, noch ohne Guess → dp bleibt 0
+    // user wants to stop wheel
     ui_in[7] = 1'b1;
-    #200_000_000; // warten bis gestoppt
+    #5_000_000;
 
-    // Jetzt alle guesses aktivieren → dp sollte bei Stillstand 1 sein
+    // start wheel again
+    ui_in[7] = 1'b0;
+    // activate all guesses simultainously
     uio_in[5:0] = 6'b111111;
-    #100_000_000;
+    #5_000_000;
 
-    // Erneut starten (stop=0)
-    ui_in[7] = 1'b0;
-    #300_000_000;
-
-    // Noch einmal stoppen
+    // stop wheel
     ui_in[7] = 1'b1;
-    #200_000_000;
+    #10_000_000;
+
 
     $finish;
     /* verilator lint_on STMTDLY */
