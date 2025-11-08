@@ -28,6 +28,7 @@ module wheel (
     reg [2:0] target_seg;
     reg stopping;
 
+/* verilator lint_off BLKSEQ */
     function [2:0] corr_range (input [2:0] pos, input [3:0] r);
         reg [3:0] tmp;
         begin
@@ -46,6 +47,7 @@ module wheel (
             corr_range = tmp[2:0];
         end
     endfunction
+/* verilator lint_on BLKSEQ */    
 
     // if next_pos would be 6 (too high for 7seg) -> make it 0
     wire [2:0] next_pos = (pos_o == 5) ? 0 : (pos_o + 1);

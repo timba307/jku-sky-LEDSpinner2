@@ -87,6 +87,6 @@ module tt_um_timba307_LEDSpinner (
     assign uio_oe  = 0; // all as inputs
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, ui_in[4], ui_in[5], ui_in[6], uio_in[7]};
+    wire _unused = &{ena, ui_in[4], ui_in[5], ui_in[6], uio_in[6], uio_in[7]};
 
 endmodule
