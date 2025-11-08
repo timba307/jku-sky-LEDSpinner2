@@ -17,7 +17,6 @@ The "wheel" of the Roulette is compromised of the outer segments on the 7-segmen
 | `uio_in[3]`    | in  | 1 | Guess bottom segment |
 | `uio_in[4]`    | in  | 1 | Guess bottom left segment |
 | `uio_in[5]`    | in  | 1 | Guess top left segment |
-| `uio_in[6]`    | in  | 1 | **WR_n** (active-low) – write selected register |
 | `uo_out[6:0]`  | out  | 7 | 7-segment outer ring |
 | `uo_out[7]`   | out | 1 | 7-segment display point |
 | `clk`          | in  | 1 | System clock |
