@@ -35,6 +35,7 @@ module tt_um_timba307_LEDSpinner (
     wire       stop_wheel = ui_in[7];      // ui[7]
     wire [5:0] guess_bits = uio_in[5:0];
 
+    // prescaler for wheel ticks
     wire wheel_tick;
     prescaler prescaler_inst (
         .clk_i(clk),
@@ -43,6 +44,7 @@ module tt_um_timba307_LEDSpinner (
         .tick_o(wheel_tick)
     );
 
+    // rng number generator with lfsr 
     wire [3:0] rng_val;
     rng rng_inst (
         .clk_i(clk),
@@ -51,7 +53,7 @@ module tt_um_timba307_LEDSpinner (
         .lfsr_o(rng_val)
     );
 
-
+    // wheel control
     wire [2:0] wheel_pos; // only values 0..5
     wire       wheel_running;
     wheel wheel_inst (
@@ -64,6 +66,7 @@ module tt_um_timba307_LEDSpinner (
         .running_o(wheel_running)
     );
 
+    // check if user guess is correct
     wire dp_on;
     guess_eval guess_inst (
         .pos_i(wheel_pos),
@@ -72,6 +75,7 @@ module tt_um_timba307_LEDSpinner (
         .dp_o(dp_on)
     );
 
+    // display spinning led on 7 seg-display
     wire [6:0] seg_bits; // seg_top .. seg_middle
     seg_driver segdriver_inst (
         .pos_i(wheel_pos),

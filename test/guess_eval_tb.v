@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-  Testbench für guess_eval (rein kombinational)
-*/
 
 `timescale 1ns/1ns
 
@@ -24,7 +21,7 @@ module guess_eval_tb;
 
   reg  [2:0] pos_i     = 3'd0;
   reg        running_i = 1'b1;  // während Spin: dp=0
-  reg  [5:0] guess_i   = 6'b000010;
+  reg  [5:0] guess_i   = 6'b010000;
   wire       dp_o;
 
   guess_eval dut (
@@ -41,19 +38,18 @@ module guess_eval_tb;
     #50;
 
     // try all positions while running=1
-    repeat (6) begin
+    repeat (5) begin
       pos_i = pos_i + 1;
       #50;
     end
 
     // try all positions while wheel is "stopped" (running=0)
     running_i = 1'b0;
-    guess_i = 6'b010000;
     pos_i   = 0;
-    repeat (6) begin
+    repeat (5) begin
       #50 pos_i = pos_i + 1;
     end
-
+    #50;
 
     $finish;
   end

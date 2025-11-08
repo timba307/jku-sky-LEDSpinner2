@@ -12,14 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-  Testbench für seg_driver (rein kombinational)
-  - prüft Einzel-Segment-Aktivierung A..F, G bleibt 0
-*/
-
 `timescale 1ns/1ns
 
-`include "seg_driver.v"  // sicherstellen, dass Dateiname so heißt
+`include "seg_driver.v"
 
 module seg_driver_tb;
 
@@ -35,17 +30,12 @@ module seg_driver_tb;
     $dumpfile("seg_driver_tb.vcd");
     $dumpvars;
 
-    /* verilator lint_off STMTDLY */
-    // pos 0..5 → jeweils genau ein Segment (A..F)
+    // try all positions
     repeat (6) begin
       #50 pos_i = pos_i + 1;
     end
 
-    // pos 6/7 → default 0
-    #50 pos_i = 3'd6;
-    #50 pos_i = 3'd7;
 
     $finish;
-    /* verilator lint_on STMTDLY */
   end
 endmodule

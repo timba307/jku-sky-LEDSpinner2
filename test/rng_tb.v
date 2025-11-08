@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-  Testbench für rng (4-bit LFSR)
-  - en_i wird periodisch getaktet
-*/
-
 `timescale 1ns/1ns
 
 `include "rng.v"
@@ -35,31 +30,21 @@ module rng_tb;
     .lfsr_o(lfsr_o)
   );
 
-  // 50 MHz
   /* verilator lint_off STMTDLY */
   always #10 clk_i = ~clk_i;
   /* verilator lint_on STMTDLY */
-
-  // Enable-Strobe: alle 200 ns (5 MHz) ein Takt lang 1
-  /*
-  reg [7:0] div = 0;
-  always @(posedge clk_i) begin
-    div  <= div + 1;
-    en_i <= (div == 8'd0);
-  end
-  */
 
   initial begin
     $dumpfile("rng_tb.vcd");
     $dumpvars;
 
-    /* verilator lint_off STMTDLY */
     #100 rst_i = 1'b0;
-    #10_000;         // kurz laufen lassen
-    #0   rst_i = 1'b1; // kurzer Reset-Puls
+    #10_000; // run
+    #0   rst_i = 1'b1; // reset test
     #40  rst_i = 1'b0;
     #50_000;
     $finish;
-    /* verilator lint_on STMTDLY */
+
+
   end
 endmodule

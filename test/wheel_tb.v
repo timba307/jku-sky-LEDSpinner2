@@ -12,12 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*
-  Testbench für wheel
-  - Generiert Tick-Strobes aus 50 MHz
-  - stop_i Sequenzen, rand_i aus rng-Instanz
-*/
-
 `timescale 1ns/1ns
 
 `include "wheel.v"
@@ -25,36 +19,34 @@
 
 module wheel_tb;
 
-  reg        clk_i   = 1'b0; // 50 MHz
+  reg        clk_i   = 1'b0;
   reg        rst_i   = 1'b1;
   reg        stop_i  = 1'b0;
   wire [3:0] rand_i;
   wire [2:0] pos_o;
   wire       running_o;
 
-  // Tick-Strobe: alle 50 us einmal (20 kHz Takt / 1-Stroke)
-  reg [15:0] tick_div = 0;
+  // make ticks to test wheel
+  reg [15:0] cnt = 0;
   reg        tick_i   = 0;
-
-
   always @(posedge clk_i) begin
     if (rst_i) begin
-      tick_div <= 0;
+      cnt <= 0;
       tick_i   <= 0;
     end else begin
-      if (tick_div == 16'd2499) begin
-        tick_div <= 0;
-        tick_i   <= 1'b1;   // 1 Takt breit
+      if (cnt == 16'd2499) begin //16'd2499 = 20khz
+        // trigger tick and reset counter
+        cnt <= 0;
+        tick_i   <= 1'b1;
       end else begin
-        tick_div <= tick_div + 1;
+        // count up
+        cnt <= cnt + 1;
         tick_i   <= 1'b0;
       end
     end
   end
   
-
-  // RNG für rand_i (steppt bei jedem Tick)
-  
+  // rng generator for every tick
   rng rng_i (
     .clk_i(clk_i),
     .rst_i(rst_i),
@@ -73,7 +65,6 @@ module wheel_tb;
     .running_o(running_o)
   );
 
-  // 50 MHz
   /* verilator lint_off STMTDLY */
   always #10 clk_i = ~clk_i;
   /* verilator lint_on STMTDLY */
@@ -84,33 +75,33 @@ module wheel_tb;
     $dumpfile("wheel_tb.vcd");
     $dumpvars;
 
-    /* verilator lint_off STMTDLY */
     #100  rst_i = 1'b0;
 
-    // Loslaufen lassen
-    #2_000_000;      // 2 ms
+    // run for 2ms
+    #2_000_000;
 
-    // Stop anfordern
+    // user wants to stop wheel
     stop_i = 1'b1;
-    #3_000_000;      // warten, bis stop erreicht (ein paar Ticks)
+    #3_000_000;
 
-    // Wieder starten
+    // start again
     stop_i = 1'b0;
     #2_000_000;
 
-    // Noch mal stoppen
+    // stop again
     stop_i = 1'b1;
     #3_000_000;
     
+    // start again
     stop_i = 1'b0;
     #2_000_000;
     
+    //stop again
     stop_i=1'b1;
     #3_000_000;
     
 
     $finish;
-    /* verilator lint_on STMTDLY */
   end
 endmodule
 

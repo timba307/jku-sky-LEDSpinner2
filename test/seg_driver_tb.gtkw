@@ -1,23 +1,49 @@
 [*]
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Fri Nov  7 17:07:07 2025
+[*] Sat Nov  8 18:32:58 2025
 [*]
 [dumpfile] "/foss/designs/jku-sky-LEDSpinner2/test/seg_driver_tb.vcd"
-[dumpfile_mtime] "Fri Nov  7 17:04:50 2025"
-[dumpfile_size] 622
+[dumpfile_mtime] "Sat Nov  8 18:32:49 2025"
+[dumpfile_size] 603
 [savefile] "/foss/designs/jku-sky-LEDSpinner2/test/seg_driver_tb.gtkw"
 [timestart] 0
 [size] 1904 600
 [pos] -1 -1
 *-6.280087 64 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[markername] AA
+[markername] BB
+[markername] CC
+[markername] DD
+[markername] EE
+[markername] FF
+[markername] GG
+[markername] HH
+[markername] II
+[markername] JJ
+[markername] KK
+[markername] LL
+[markername] MM
+[markername] NN
+[markername] OO
+[markername] PP
+[markername] QQ
+[markername] RR
+[markername] SS
+[markername] TT
+[markername] UU
+[markername] VV
+[markername] WW
+[markername] XX
+[markername] YY
+[markername] ZZ
 [treeopen] seg_driver_tb.
 [sst_width] 297
 [signals_width] 146
 [sst_expanded] 1
 [sst_vpaned_height] 149
-@28
+@24
 seg_driver_tb.dut.pos_i[2:0]
-@29
+@28
 seg_driver_tb.dut.seg_o[6:0]
 [pattern_trace] 1
 [pattern_trace] 0
